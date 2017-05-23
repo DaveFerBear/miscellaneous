@@ -1,2 +1,2 @@
-# miscellaneous
-Miscellaneous collection of software projects and interesting solutions.
+#miscellaneous
+Solutions to interesting problems.
