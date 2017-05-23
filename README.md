@@ -1,2 +1,2 @@
-#miscellaneous
+# miscellaneous
 Solutions to interesting problems.
