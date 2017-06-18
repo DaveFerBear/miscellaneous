@@ -99,6 +99,9 @@ def answer(entrances, exits, path):
 	for i,e in enumerate(entrances):
 		path[n][i] = source_weights[i]
 	
+	for x in path:
+		print(x)
+
 	g = Graph(path)
 	return g.EdmondsKarp(n,n+1)
 
