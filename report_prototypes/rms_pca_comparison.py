@@ -36,8 +36,6 @@ for i in range(2,8):
 	X[i] = get_noise(n)
 X = np.asarray(X)
 
-plot_multiple(X, title='Simulated EMG Channels', filename='channels')
-
 #Perform RMS
 Y_rms = np.asarray([sqrt(abs(sum(t))) for t in X.T])
 
@@ -48,3 +46,6 @@ X_projected = np.dot(X.T, W)
 Y_pca = X_projected.T[-1]
 if sum(Y_pca) < 0: 
 	Y_pca*=-1
+
+#Plot
+plot_multiple(X, title='Simulated EMG Channels', filename='channels')
