@@ -1,6 +1,5 @@
 import json
 
-
 class Palindrome():
 
 	'''
@@ -22,23 +21,30 @@ class Palindrome():
 
 	'''
 	file_name:	filename with data to be read
+	returns:	number of palindromes in data file
 	'''
 	@staticmethod
 	def get_number_palindromes(file_name='data.txt'):
-		palindrome_count = 0
+		return len(Palindrome.get_palindrome_list(file_name=file_name))
+
+
+	'''
+	file_name:	filename with data to be read
+	returns:	list of palindromes from data file
+	'''
+	@staticmethod
+	def get_palindrome_list(file_name='data.txt'):
+		palindromes = []
 		with open(file_name, 'r') as f:
 			for line in f:
 				try:
 					data_in = json.loads(line)
 					if 'key' in data_in:
-						if Palindrome.is_palindrome(data_in['key']):
-							palindrome_count+=1
+						p = data_in['key']
+						if Palindrome.is_palindrome(p):
+							palindromes.append(p)
 
 				except ValueError as e: # invalid JSON
 					pass
 
-			return palindrome_count
-
-
-
-		
+		return palindromes

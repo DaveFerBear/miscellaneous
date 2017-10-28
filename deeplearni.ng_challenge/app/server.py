@@ -7,7 +7,8 @@ api = Api(app)
 
 class PalindromeResource(Resource):
 	def get(self):
-		return {'test': 'result'}
+		l = Palindrome.get_palindrome_list()
+		return l
 
 class PalindromeCountResource(Resource):
 	def get(self):
