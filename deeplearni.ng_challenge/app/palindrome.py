@@ -24,7 +24,7 @@ class Palindrome():
 	returns:	number of palindromes in data file
 	'''
 	@staticmethod
-	def get_num_palindromes(file_name='data.txt'):
+	def get_num_palindromes(file_name):
 		return len(Palindrome.get_palindrome_list(file_name=file_name))
 
 
@@ -33,7 +33,7 @@ class Palindrome():
 	returns:	list of palindromes from data file
 	'''
 	@staticmethod
-	def get_palindrome_list(file_name='data.txt'):
+	def get_palindrome_list(file_name):
 		palindromes = []
 		with open(file_name, 'r') as f:
 			for line in f:
