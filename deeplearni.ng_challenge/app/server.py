@@ -17,12 +17,10 @@ def start(port, data_file_name):
 
 class PalindromeResource(Resource):
 	def get(self):
-		print(data_file)
-		return jsonify(palindrome_list=', '.join(Palindrome.get_palindrome_list(data_file)))
+		return jsonify(palindromes=Palindrome.get_palindrome_list(data_file))
 
 class PalindromeCountResource(Resource):
 	def get(self):
-		print(data_file)
 		return jsonify(number_palindromes=Palindrome.get_num_palindromes(data_file))
 
 
