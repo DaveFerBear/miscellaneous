@@ -2,6 +2,7 @@
 This REST service is written in Python and uses [Flask](http://flask.pocoo.org/) and [Flask-RESTful](https://flask-restful.readthedocs.io/en/latest/).
 
 ### How to Build
+It is reccomended to use a python environment tool like virtualenv or conda.
 1. Install the necessary python packages: `pip install requirements.txt`
 2. Run the server: `python main.py XXXX`, where XXXX is an optional param specifying port number.  Default is 5000.
 
