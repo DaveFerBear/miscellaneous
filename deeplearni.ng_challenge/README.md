@@ -13,7 +13,7 @@ A test suite can be executed by running the `test.py` script.
 
 `GET:/palindromes/count` - Returns the sum of the number of lines containing palindromes.
 
-#### File Details
+### File Details
 * `main.py` is a starting point for execution.
 * `server.py` contains server logic and endpoint declarations.
 * `palindrome.py` is an extensible library for reading palindrome files.
