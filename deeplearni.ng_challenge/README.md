@@ -3,7 +3,7 @@ This REST service is written in Python and uses [Flask](http://flask.pocoo.org/)
 
 ### How to Build
 1. Install the necessary python packages: `pip install requirements.txt`
-2. Run the server: `python app/server.py`.  The default port is 5000, but can be changed with a `-p` flag.
+2. Run the server: `python app/server.py`.  The default port is 5000, but can be changed by adding the port as an optional parameter : `python app/server.py XXXX`
 
 ### Test and Verification
 A test suite can be executed by running the `test.py` script.
