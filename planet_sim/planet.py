@@ -1,8 +1,9 @@
 import random
 
+'''
+This class is purely a data container.
+'''
 class Planet():
-	def __init__(self):
-		pass
 	def __init__(self, pos=[None,None], vel=[None,None], name=None, size=None):
 		if len(pos) != 2:
 			raise ValueError('Only 2D space currently supported.')
