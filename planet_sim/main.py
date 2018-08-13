@@ -12,7 +12,9 @@ if __name__ == '__main__':
 	# u.run_sim()
 
 	arena = Arena(u)
-	arena.setup_universe()
-	for t in xrange(100):
-		u.run_sim(num_steps=1)
-		arena.update_planets()
+	arena.test_gui()
+	# arena.setup_universe()
+	# for t in xrange(100):
+	# 	print(t)
+	# 	u.run_sim(num_steps=1)
+	# 	arena.update_planets()
