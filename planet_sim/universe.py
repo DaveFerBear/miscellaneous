@@ -38,12 +38,17 @@ class Universe():
 				for k2,v2 in self.planets.iteritems():
 					if k1 is not k2:
 						dist_sq = utils.euclidean_distance_squared(v1.x, v1.y, v2.x, v2.y)
+
+						# Glitch in the sim.
 						if dist_sq == 0:
-							force_map [k1] = (0., 0.)
+							force_map[k1] = (0., 0.)
+						# Planets touching.
+						elif dist_sq <= (v1.size+v2.size)/2.:
+							force_map[k1] = (0., 0.)
 						else:
 							# Prevents 'result too large' errors.
 							# TODO: Formalize max accleration/forces possible in universe.
-							force_magnitude = min(self.G*v1.size*v2.size/dist_sq, 1e20) * .0000001
+							force_magnitude = self.G*v1.size*v2.size/dist_sq * 1e-2
 							fx = force_magnitude*(v2.x - v1.x)/dist_sq
 							fy = force_magnitude*(v2.y - v1.y)/dist_sq
 							force_map[k1] = (fx, fy)
@@ -51,8 +56,8 @@ class Universe():
 			for planet_name,force_components in force_map.iteritems():
 				# Update planet.
 				p = self.planets[planet_name]
-				p.ax = 0#force_components[0]*p.size
-				p.ay = 0#force_components[1]*p.size
+				p.ax = force_components[0]*p.size
+				p.ay = force_components[1]*p.size
 				p.vx += p.ax
 				p.vy += p.ay
 				p.x += p.vx
@@ -64,5 +69,7 @@ class Universe():
 				if should_update:
 					v1.print_location()
 		print('Simulation 100% complete.')
-
+		for k,v in self.planets.iteritems():
+			print(k + ' motion history.')
+			print(v.pos_history)
 

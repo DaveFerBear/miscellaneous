@@ -30,7 +30,7 @@ class Arena():
 					outline="white", fill=utils.random_tkinter_color())
 
 	# Animates planet position history. How cool is this function name?
-	def animate_universe_history(self):
+	def animate_universe_history(self, frame_delay_ms=10):
 		# Sanity check - the planets must have the same length history.
 		planet_histories = set([len(v.pos_history) for k,v in self.universe.planets.iteritems()])
 		if len(planet_histories) is not 1:
@@ -42,13 +42,20 @@ class Arena():
 		print('Simulation History Length: {t}'.format(t=self.time_left))
 
 		def redraw():
-			if self.time_left > 0:
-				self.canvas.after(400, redraw)
+			if self.time_left > 1:
+				self.canvas.after(frame_delay_ms, redraw)
 				self.time_left = self.time_left-1
+				print(self.time_left)
 				for name,circle in self.planet_map.iteritems():
+
 					p = self.universe.planets[name]
-					self.canvas.move(circle, p.pos_history[self.time_left][0], p.pos_history[self.time_left][1])
-		self.canvas.after(400, redraw)
+					dx = p.pos_history[self.time_left][0]-p.pos_history[self.time_left-1][0]
+					dy = p.pos_history[self.time_left][1]-p.pos_history[self.time_left-1][1]
+
+					print(dx,dy)
+
+					self.canvas.move(circle, dx, dy)
+		self.canvas.after(frame_delay_ms, redraw)
 		self.root.mainloop()
 
 
