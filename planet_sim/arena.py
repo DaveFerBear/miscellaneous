@@ -1,7 +1,8 @@
 try:
-    import Tkinter as tk # Python 2
+	import Tkinter as tk # Python 2
 except:
-    import tkinter as tk # Python 3
+	import tkinter as tk # Python 3
+import utils
 
 '''
 An arena handles all GUI logic, rendering the output of the universe.
@@ -17,11 +18,23 @@ class Arena():
 		self.canvas = tk.Canvas(self.root,width=width,height=height)
 		self.canvas.pack()
 
-	def setup_universe_gui(self):
+	def setup_universe(self):
 		self.planet_map = {}
 		for name,planet in self.universe.planets.iteritems():
-			self.planet_map[name] = self.canvas.create_oval(planet.size,planet.size,planet.x,planet.y,outline="white",fill="blue")
+			self.planet_map[name] = self.canvas.create_oval(
+					planet.x, planet.y,
+					planet.x+planet.size,
+					planet.y+planet.size,
+					outline="white", fill=utils.random_tkinter_color())
 		self.root.mainloop()
+
+	def update_planets(self):
+		for name,circle in self.planet_map.iteritems():
+			p = self.universe.planets[name]
+			p_coords = self.canvas.coords(circle)
+			self.canvas.move(self.circle, p.x-p_coords[0], p.y-p_coords[1])
+		self.root.mainloop()
+
 
 	# This can be used to verify the GUI will output what is expected.
 	def test_gui(self):
