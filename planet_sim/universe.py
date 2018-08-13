@@ -18,7 +18,7 @@ class Universe():
 			return
 		self.planets[p.name] = p
 
-	def run_sim(self, num_steps=10000, update_frequency=1000):
+	def run_sim(self, num_steps=100000, update_frequency=1000, save_history=True):
 		# Create a map of update weights in memory.  This way we can update all planets at once
 		# for a much more accurate simulation.
 		force_map = {}
@@ -43,19 +43,23 @@ class Universe():
 						else:
 							# Prevents 'result too large' errors.
 							# TODO: Formalize max accleration/forces possible in universe.
-							force_magnitude = min(self.G*v1.size*v2.size/dist_sq, 1e20)
+							force_magnitude = min(self.G*v1.size*v2.size/dist_sq, 1e20) * .0000001
 							fx = force_magnitude*(v2.x - v1.x)/dist_sq
 							fy = force_magnitude*(v2.y - v1.y)/dist_sq
 							force_map[k1] = (fx, fy)
 
 			for planet_name,force_components in force_map.iteritems():
+				# Update planet.
 				p = self.planets[planet_name]
-				p.ax += force_components[0]*p.size
-				p.ay += force_components[1]*p.size
+				p.ax = 0#force_components[0]*p.size
+				p.ay = 0#force_components[1]*p.size
 				p.vx += p.ax
 				p.vy += p.ay
 				p.x += p.vx
 				p.y += p.vy
+
+				if save_history: 
+					p.pos_history.append((p.x, p.y))
 
 				if should_update:
 					v1.print_location()

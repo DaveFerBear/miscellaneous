@@ -9,12 +9,8 @@ if __name__ == '__main__':
 	p2.print_location()
 	planet_map = {'p1': p1, 'p2': p2}
 	u = Universe(planets=planet_map)
-	# u.run_sim()
+	u.run_sim(save_history=True)
 
 	arena = Arena(u)
-	arena.test_gui()
-	# arena.setup_universe()
-	# for t in xrange(100):
-	# 	print(t)
-	# 	u.run_sim(num_steps=1)
-	# 	arena.update_planets()
+	arena.setup_universe()
+	arena.animate_universe_history()
