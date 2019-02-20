@@ -17,7 +17,7 @@ class Path(object):
             self.canvas.delete(o)
 
 
-def generate_fourier_path(freqs, radii):
+def generate_fourier_pathc(freqs, radii):
     NUM_STEPS = 1000
     rads_per_step = 2*math.pi/NUM_STEPS
     paths = [[0,0] for _ in xrange(NUM_STEPS)]
