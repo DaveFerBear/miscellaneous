@@ -15,11 +15,12 @@ class Path(object):
         print('Attemping deletion of path.')
         for o in self.objects:
             self.canvas.delete(o)
+        print('Deletion completed.')
 
 
 def generate_fourier_path(freqs, radii):
     NUM_STEPS = 360
-    rads_per_step = 2*math.pi/NUM_STEPS
+    rads_per_step = 2*math.pi/(NUM_STEPS-1)
     path = [[0,0] for _ in xrange(NUM_STEPS)]
     
     for j in xrange(NUM_STEPS):

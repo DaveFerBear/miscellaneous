@@ -1,23 +1,19 @@
 import Tkinter as tk # Python 2
 import path_generator as pg
+import utils
 import random
 
-def get_rand_color():
-    colors = ['red', 'blue', 'orange', 'green', 'yellow']
-    i = int(random.random()*len(colors))
-    return colors[i]
-
-def draw_new_circle(canvas, x, y, size=10, outline = 'blue', fill = 'orange', offset = 0):
+def draw_new_circle(canvas, x, y, outline, fill, size=10, offset=0):
     return canvas.create_oval(x+offset, y+offset, x+size+offset, y+size+offset, outline=outline, fill=fill)
 
-def draw_path(canvas, path, fill='orange', outline='blue'):
+def draw_path(canvas, path, fill='orange', outline='black'):
     p = pg.Path(canvas)
     x, y = None, None
     t = 0
 
     def redraw(path,t, x, y):
         if x and y:
-            circle = draw_new_circle(canvas, x, y, fill=fill, outline=outline, offset = 350)
+            circle = draw_new_circle(canvas, x, y, outline, fill, offset = 350)
             p.add_object(circle)
 
         if (t < len(path)-1):
@@ -47,15 +43,14 @@ if __name__ == '__main__':
     radii.append([10, 50, 15])
 
     # Path Three
-    freqs.append([20, 24])
-    radii.append([200, 100])
+    freqs.append([11, 14, 111, 141])
+    radii.append([200, 100, 20, 10])
 
     for i,f in enumerate(freqs):
         paths.append(pg.generate_fourier_path(freqs[i], radii[i]))
 
     for p in paths:
-        draw_path(canvas, p, fill=get_rand_color())
+        draw_path(canvas, p, fill=utils.random_tkinter_color())
 
     # del p TODO: fix this deletion code.
     root.mainloop()
-
