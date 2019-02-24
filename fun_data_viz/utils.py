@@ -1,5 +1,8 @@
 import random
 
+def random_array(length, mx=10, mn=0):
+    return [random.random()*(mx-mn)+mn for _ in xrange(length)]
+
 def random_tkinter_color():
 	return COLORS[int(random.random()*len(COLORS))]
 
