@@ -1,28 +1,34 @@
 import Tkinter as tk # Python 2
 import path_generator as pg
+import random
 
-def draw_new_circle(canvas, x, y, size=10, offset = 0):
-    return canvas.create_oval(x+offset, y+offset, x+size+offset, y+size+offset,outline='orange', fill='blue')
+def get_rand_color():
+    colors = ['red', 'blue', 'orange', 'green', 'yellow']
+    i = int(random.random()*len(colors))
+    return colors[i]
 
-def draw_path(canvas, path):
+def draw_new_circle(canvas, x, y, size=10, outline = 'blue', fill = 'orange', offset = 0):
+    return canvas.create_oval(x+offset, y+offset, x+size+offset, y+size+offset, outline=outline, fill=fill)
+
+def draw_path(canvas, path, fill='orange', outline='blue'):
     p = pg.Path(canvas)
     x, y = None, None
     t = 0
 
-    def redraw(paths,t, x, y):
+    def redraw(path,t, x, y):
         if x and y:
-            circle = draw_new_circle(canvas, x, y, offset = 350)
+            circle = draw_new_circle(canvas, x, y, fill=fill, outline=outline, offset = 350)
             p.add_object(circle)
-        
-        if (t < len(paths)-1):
+
+        if (t < len(path)-1):
             t += 1
-            x = paths[t][0]
-            y = paths[t][1]
-            canvas.after(1, redraw, paths, t, x, y)
+            x = path[t][0]
+            y = path[t][1]
+            canvas.after(1, redraw, path, t, x, y)
         else:
             return
 
-    canvas.after(100,redraw, test_path, t, x, y)
+    canvas.after(100,redraw, path, t, x, y)
     return p
 
 if __name__ == '__main__':
@@ -30,12 +36,26 @@ if __name__ == '__main__':
     canvas = tk.Canvas(root, width=700, height=700)
     canvas.pack()
 
-    freqs = [1, 5, 13, 21]
-    radii = [100, 50, 15, 15]
-    test_path = pg.generate_fourier_path(freqs, radii)
+    freqs, radii, paths = [], [], []
 
-    p = draw_path(canvas, test_path)
-    del p
+    # Path One
+    freqs.append([1, 5, 13, 21])
+    radii.append([100, 50, 15, 15])
 
+    # Path Two
+    freqs.append([21, 5, 13])
+    radii.append([10, 50, 15])
+
+    # Path Three
+    freqs.append([20, 24])
+    radii.append([200, 100])
+
+    for i,f in enumerate(freqs):
+        paths.append(pg.generate_fourier_path(freqs[i], radii[i]))
+
+    for p in paths:
+        draw_path(canvas, p, fill=get_rand_color())
+
+    # del p TODO: fix this deletion code.
     root.mainloop()
 
