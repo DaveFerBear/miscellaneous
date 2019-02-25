@@ -46,14 +46,6 @@ if __name__ == '__main__':
     freqs.append([11, 14, 111, 141])
     radii.append([200, 100, 20, 10])
 
-    # Path Four
-    freqs.append([17, 3, 65])
-    radii.append([30, 110, 10])
-
-    # Path Five
-    freqs.append([26, 37, 3, 29, 100])
-    radii.append([31, 67, 110, 40, 89])
-
     for i,f in enumerate(freqs):
         paths.append(pg.generate_fourier_path(freqs[i], radii[i]))
 
